@@ -5,11 +5,38 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+    data = []
+    data =  @movies.collect{|movie|
+      {
+        "id"=>movie.id.to_s,
+        "name"=>movie.name,
+        "description"=>movie.description,
+        "rating"=>movie.rating.to_s,
+        "image"=>movie.test_image
+      }
+      
+      }
+    respond_to do |format|
+    format.html  
+    format.json  { render :json =>  data }
+  end
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
+    data =  
+      {
+        "id"=>@movie.id.to_s,
+        "name"=>@movie.name,
+        "description"=>@movie.description,
+        "rating"=>@movie.rating.to_s,
+        "image"=>@movie.test_image
+      }
+      respond_to do |format|
+    format.html  
+    format.json  { render :json =>  data }
+  end
   end
 
   # GET /movies/new
@@ -69,6 +96,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:name, :description, :rating, :director, :release_date,:image)
+      params.require(:movie).permit(:name, :description, :rating, :director, :release_date,:test_image)
     end
 end

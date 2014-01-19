@@ -23,7 +23,7 @@
         <td><%= movie.rating %></td>
         <td><%= movie.director %></td>
         <td><%= movie.release_date %></td>
-        <td><%= image_tag movie.image.url(:thumb) %></td>
+        <td><%= image_tag movie.test_image %></td>
         <td><%= link_to 'Show', movie %></td>
         <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
         <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140119143220) do
     t.integer  "rating"
     t.string   "director"
     t.date     "release_date"
+    t.string   "test_image"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
