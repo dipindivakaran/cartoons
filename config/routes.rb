@@ -1,4 +1,6 @@
 Cartoons::Application.routes.draw do
+  resources :movies
+
   get "dashboard/index"
   get "dashboard/cartoons"
 
