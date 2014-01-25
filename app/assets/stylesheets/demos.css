@@ -17,3 +17,12 @@ table {
 .ui-draggable, .ui-droppable {
 	background-position: top;
 }
+
+.cartoon-image{
+	width: 50px;
+	height:5S0px;
+}
+.cartoon{
+	width: 50px;
+	height:50px;
+}
