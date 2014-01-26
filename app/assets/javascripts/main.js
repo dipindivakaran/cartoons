@@ -13,37 +13,12 @@ $(document).ready(function() {
 	});
 
 	$("#convert").click(function() {
-		var oCanvas = document.getElementById("#myCanvas");  
-		
-		var strDataURI = oCanvas.toDataURL("image/jpeg");  
-		alert(strDataURI);
-
-		var data = "<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>" + "<foreignObject width='100%' height='100%'>" + "<div xmlns='http://www.w3.org/1999/xhtml'>" +
-
-		/// extract the html content of div
-		document.getElementById('cart').innerHTML + "</div>" + "</foreignObject>" + "</svg>";
-
-		var DOMURL = self.URL || self.webkitURL || self;
-		var img = new Image();
-		var svg = new Blob([data], {
-			type : "image/svg+xml;charset=utf-8"
+		var datastring = $('#workspace')[0].toDataURL("image/png");
+		alert(datastring);
+		datastring = datastring.replace(/^data:image\/(png|jpg);base64,/, "");
+		$.post('upload', {
+			data : JSON.stringify(datastring)
 		});
-		var reader = new window.FileReader();
-		reader.readAsDataURL(svg);
-		reader.onloadend = function() {
-			base64data = reader.result;
-			alert(base64data);
-			$.post('upload',{image : base64data});
-       };
-		/// create an url that we can use for the image tag
-		var url = DOMURL.createObjectURL(svg);
-		img.onload = function() {
-
-			/// now we can draw the "html" to canvas.
-			ctx.drawImage(img, 0, 0);
-			DOMURL.revokeObjectURL(url);
-		};
-		img.src = url;
 
 	});
 
@@ -60,11 +35,8 @@ function init_drag_and_drop() {
 		hoverClass : "ui-state-hover",
 		accept : ":not(.ui-sortable-helper)",
 		drop : function(event, ui) {
-			
-			 var context = $(this)[0].getContext("2d");
-			 
-			context.fillHtml($(ui.draggable).clone());
-			$("#workspace > img").draggable();
+			img_id = ui.draggable.attr("id");
+			draw_imge_on_canvas($("#" + img_id).find("img").attr("src"));
 		}
 	});
 }
