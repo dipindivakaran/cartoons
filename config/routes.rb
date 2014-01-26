@@ -1,5 +1,6 @@
 Cartoons::Application.routes.draw do
   resources :movies
+  resources :users
 
   get "dashboard/index"
   get "dashboard/cartoons"
@@ -18,6 +19,10 @@ Cartoons::Application.routes.draw do
    get '/cartoons' => 'dashboard#cartoons', via:[:get]
    post '/upload' => 'dashboard#upload', via:[:post]
    get '/view_images' => 'dashboard#view_images', via:[:get]
+   get '/login' => 'user_sessions#new'
+   post 'user_sessions/create' => 'user_sessions#create'
+   get '/registration' => 'users#new'
+   post '/register' => 'users#create'
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
