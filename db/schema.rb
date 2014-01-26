@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119143220) do
+ActiveRecord::Schema.define(version: 20140126145032) do
+
+  create_table "images", force: true do |t|
+    t.binary   "data",       limit: 16777215
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "movies", force: true do |t|
     t.string   "name"

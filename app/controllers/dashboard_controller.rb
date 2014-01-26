@@ -16,9 +16,8 @@ skip_before_filter :verify_authenticity_token
   
    def upload
     data_url = params[:data]
-   set_avatar_from_base64(data_url)
-    
-    
+    data_u = Base64.decode64(data_url)
+    Image.create!(:data=>data_u)
   end
   
    def set_avatar_from_base64(base64_data)
@@ -29,5 +28,9 @@ skip_before_filter :verify_authenticity_token
       end
   end
   
+  
+  def view_images
+    @images = Image.all
+  end
   
 end

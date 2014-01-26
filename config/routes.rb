@@ -17,6 +17,7 @@ Cartoons::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
    get '/cartoons' => 'dashboard#cartoons', via:[:get]
    post '/upload' => 'dashboard#upload', via:[:post]
+   get '/view_images' => 'dashboard#view_images', via:[:get]
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

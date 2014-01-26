@@ -13,30 +13,30 @@ $(document).ready(function() {
 	});
 
 	$("#convert").click(function() {
-		var datastring = $('#workspace')[0].toDataURL("image/png");
-		alert(datastring);
-		datastring = datastring.replace(/^data:image\/(png|jpg);base64,/, "");
-		$.post('upload', {
-			data : JSON.stringify(datastring)
-		});
-
+		stage.toDataURL({
+          callback: function(dataUrl) {
+          	dataUrl= dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+          	$.post("upload",{data:dataUrl});
+          }
+       });
 	});
-
 });
 
 function init_drag_and_drop() {
+	
 	$("#catalog").accordion();
 	$(".cartoon").draggable({
 		helper : "clone",
 		revert : "invalid"
 	});
-	$("#workspace").droppable({
+	$("#container").droppable({
 		activeClass : "ui-state-default",
 		hoverClass : "ui-state-hover",
 		accept : ":not(.ui-sortable-helper)",
 		drop : function(event, ui) {
 			img_id = ui.draggable.attr("id");
-			draw_imge_on_canvas($("#" + img_id).find("img").attr("src"));
+			console.log(img_id);
+			load_image(stage,$("#" + img_id).find("img").attr("src"));
 		}
 	});
 }
